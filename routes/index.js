@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
     try{
       const datas = await User_account.findAll()
       res.status(200).json({
-        ststus: 200,
+        status: 200,
         msg: 'success',
         data: datas
       })
