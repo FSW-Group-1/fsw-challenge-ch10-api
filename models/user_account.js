@@ -28,12 +28,37 @@ module.exports = (sequelize, DataTypes) => {
 
     checkPassword = (password) => bcrypt.compareSync(password, this.password)
 
+    // Method untuk authenticate, login
+    static authenticate = async({ username, password }) => {
+      try {
+        const user = await this.findOne({ where: { username }})
+        if(!user) return Promise.reject("User not found!");
+        const isPasswordValid = user.checkPassword(password);
+        if(!isPasswordValid) return Promise.reject("Wrong password");
+        return Promise.resolve(user);
+      } catch(err) {
+        return Promise.reject(err);
+      }
+    }
+
+    // generate token JWT
+    generateToken = () => {
+      const payload = {
+        id: this.id,
+        username: this.username
+      }
+      // Generate token
+      return jwt.sign(payload, 'binarch7')
+    }
 
   };
   User_account.init({
     username: DataTypes.STRING,
     password: DataTypes.STRING,
-    email: DataTypes.STRING
+    email: DataTypes.STRING,
+    description: DataTypes.STRING,
+    imageLink: DataTypes.STRING,
+    point: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'User_account',
