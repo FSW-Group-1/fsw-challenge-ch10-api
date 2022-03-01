@@ -29,10 +29,10 @@ module.exports = (sequelize, DataTypes) => {
     checkPassword = (password) => bcrypt.compareSync(password, this.password)
 
     // Method untuk authenticate, login
-    static authenticate = async({ username, password }) => {
+    static authenticate = async({ email, password }) => {
       try {
-        const user = await this.findOne({ where: { username }})
-        if(!user) return Promise.reject("User not found!");
+        const user = await this.findOne({ where: { email }})
+        if(!user) return Promise.reject("Email not found!");
         const isPasswordValid = user.checkPassword(password);
         if(!isPasswordValid) return Promise.reject("Wrong password");
         return Promise.resolve(user);

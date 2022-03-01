@@ -2,13 +2,13 @@ const { User_account } = require('../models')
 
 
 module.exports = {
-    registerPost: async (req, res) => {
+    register: async (req, res) => {
         const { username, email, password} = req.body
         
         try {
             var user = await User_account.findOne({
                 where: {
-                    email: req.body.email
+                    email
                 }
             })
 
@@ -42,8 +42,36 @@ module.exports = {
                 result: 'failed',
                 message: error.message
             })
+        }   
+    },
+
+    login: async(req, res) => {
+        try {
+            User_account
+            .authenticate(req.body)
+            .then(user => {
+                res.status(201).json({
+                    result: "Login success",
+                    message: "Login successfully",
+                    data: {
+                        id: user.id, 
+                        username: user.username, 
+                        accessToken: user.generateToken()
+                    },
+                });
+            })
+            .catch(error => {
+                res.status(400).json({
+                    result: 'failed',
+                    message: error.message
+                })
+            })
+        } catch (error) {
+            return res.status(500).json({
+                result: 'Server failed',
+                error: error.message,
+              });
         }
-        
     }
 }
 
