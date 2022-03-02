@@ -15,6 +15,12 @@ var app = express();
   app.use(cors({ origin: '*' }))
 // ============
 
+// === Swagger UI ===
+  const swaggerJSON = require('./swagger.json')
+  const swaggerUI = require('swagger-ui-express')
+  app.use('/', swaggerUI.serve, swaggerUI.setup(swaggerJSON))
+// ==================
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
