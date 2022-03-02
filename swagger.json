@@ -9,7 +9,7 @@
   "tags": [
     {
       "name": "Database Test",
-      "description": "For testing database only"
+      "description": "For database testing only"
     }
   ],
   "schemes": [
