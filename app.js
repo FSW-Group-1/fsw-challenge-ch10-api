@@ -18,7 +18,7 @@ var app = express();
 // === Swagger UI ===
   const swaggerJSON = require('./swagger.json')
   const swaggerUI = require('swagger-ui-express')
-  app.use('/', swaggerUI.serve, swaggerUI.setup(swaggerJSON))
+  app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerJSON))
 // ==================
 
 // view engine setup
