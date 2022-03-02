@@ -7,6 +7,7 @@ router.post('/register', authController.register)
 router.post('/login', authController.login)
 
 router.get('/me', restrict, authController.currentProfile)
+router.get('/all', authController.showAllProfile)
 router.post('/me/update', restrict, authController.updateProfile)
 
 

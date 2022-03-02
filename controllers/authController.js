@@ -121,6 +121,31 @@ module.exports = {
                 error: error.message,
               });
         }
+    },
+
+    showAllProfile: async(req, res) =>{
+        try {
+            const users = await User_account.findAll({
+                attributes: {exclude: ['password']}
+            });
+
+            if (!users) {
+                res.status(404).json({
+                  result: 'error',
+                  message: 'no user registered',
+                });
+              }
+            return res.status(200).json({
+                result: 'sucess',
+                message: 'Showing all available user',
+                data: users
+            })
+        } catch (error) {
+            return res.status(500).json({
+                result: 'Server failed',
+                error: error.message,
+              });
+        }
     }
 }
 
