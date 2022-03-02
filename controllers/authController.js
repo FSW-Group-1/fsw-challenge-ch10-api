@@ -72,6 +72,21 @@ module.exports = {
                 error: error.message,
               });
         }
+    },
+
+    currentProfile: async (req, res) => {
+        try {
+            const currentUser = await User_account.findByPk(req.user.id)
+            res.status(200).json({
+                success: true,
+                currentUser,
+              });
+        } catch (error) {
+            return res.status(500).json({
+                result: 'Server failed',
+                error: error.message,
+              });
+        }
     }
 }
 
