@@ -28,15 +28,14 @@ module.exports = {
 
         try {
             await User_account.register(req.body)
-                .then(
-                    res.status(201).json({
-                        message: 'Account has successfully registered!',
-                        data: {
-                          email,
-                          username,
-                        }
-                    })
-                )
+            res.status(201).json({
+                message: 'Account has successfully registered!',
+                data: {
+                  email,
+                username,
+                }
+            })
+                
         } catch (error) {
             return res.status(400).json({
                 result: 'failed',
@@ -76,11 +75,46 @@ module.exports = {
 
     currentProfile: async (req, res) => {
         try {
-            const currentUser = await User_account.findByPk(req.user.id)
+            const currentUserInfo = await User_account.findByPk(req.user.id)
             res.status(200).json({
-                success: true,
-                currentUser,
+                currentUserInfo
+            })
+        } catch (error) {
+            return res.status(500).json({
+                result: 'Server failed',
+                error: error.message,
               });
+        }
+    },
+
+    updateProfile: async (req, res) => {
+        try {
+            const { username, description, imageLink } = req.body;
+            const id = req.user.id;
+
+            if(!id){
+                return res.status(400).json({
+                    result: 'error',
+                    message: 'ID not found'
+                })
+            }
+            
+            const user = await User_account.update({
+                username,
+                description, 
+                imageLink
+            },
+            {where: {id}})
+            res.status(200).json({
+                result: 'success',
+                message: 'Info sucessfully updated',
+                updatedInfo: {
+                    username,
+                    description,
+                    imageLink
+                }
+            })
+
         } catch (error) {
             return res.status(500).json({
                 result: 'Server failed',
