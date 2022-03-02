@@ -3,9 +3,9 @@ var router = express.Router();
 const { User_account } = require('../models')
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+// router.get('/', function(req, res, next) {
+//   res.render('index', { title: 'Express' });
+// });
 
 // === Test DB ===
   router.get('/test-accounts', async(req, res) => {
