@@ -7,6 +7,10 @@ const { User_account } = require('../models')
 //   res.render('index', { title: 'Express' });
 // });
 
+router.get('/', (req, res) => {
+  res.redirect('/docs')
+})
+
 // === Test DB ===
   router.get('/test-accounts', async(req, res) => {
     try{
