@@ -21,9 +21,9 @@ module.exports = {
 
   async down (queryInterface, Sequelize) {
     try {
-      await queryInterface.dropColumn('User_accounts', 'description');
-      await queryInterface.dropColumn('User_accounts', 'imageLink');
-      await queryInterface.dropColumn('User_accounts', 'point');
+      await queryInterface.removeColumn('User_accounts', 'description');
+      await queryInterface.removeColumn('User_accounts', 'imageLink');
+      await queryInterface.removeColumn('User_accounts', 'point');
       return Promise.resolve();
     } catch (error) {
       return Promise.reject(error);
