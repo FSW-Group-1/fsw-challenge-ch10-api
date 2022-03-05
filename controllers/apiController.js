@@ -1,5 +1,4 @@
-const { User_account } = require('../models')
-
+const { User_account, Details } = require('../models')
 
 module.exports = {
     register: async (req, res) => {
@@ -140,6 +139,17 @@ module.exports = {
                 message: 'Showing all available user',
                 data: users
             })
+        } catch (error) {
+            return res.status(500).json({
+                result: 'Server failed',
+                error: error.message,
+              });
+        }
+    },
+
+    updateDetails: async(req, res) =>{
+        try {
+            
         } catch (error) {
             return res.status(500).json({
                 result: 'Server failed',
