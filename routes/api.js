@@ -1,14 +1,15 @@
 var express = require('express');
 var router = express.Router();
-const authController = require('../controllers/apiController')
+const api = require('../controllers/apiController')
 const restrict = require('../middlewares/restrict')
 
-router.post('/register', authController.register)
-router.post('/login', authController.login)
+router.post('/register', api.register)
+router.post('/login', api.login)
 
-router.get('/me', restrict, authController.currentProfile)
-router.get('/all', authController.showAllProfile)
-router.post('/me/update', restrict, authController.updateProfile)
+router.get('/me', restrict, api.currentProfile)
+router.get('/all', api.showAllProfile)
+router.post('/me/update', restrict, api.updateProfile)
+router.post('/score', restrict, api.updateDetails)
 
 
 
