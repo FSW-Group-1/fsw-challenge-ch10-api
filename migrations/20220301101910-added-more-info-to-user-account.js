@@ -11,6 +11,7 @@ module.exports = {
       });
       await queryInterface.addColumn('User_accounts', 'point', {
         type: Sequelize.INTEGER,
+        defaultValue: 0
       });
       return Promise.resolve();
     } catch (error) {

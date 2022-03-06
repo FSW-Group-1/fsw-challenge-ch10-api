@@ -23,29 +23,31 @@ module.exports = {
                     userID: req.user.id,
                     point: req.body.point
                 })
-                .then(User_account.update({ point: req.body.point}, {where: {id: req.user.id}}))
+                .then(User_account.update({ point: parseInt(req.body.point) + user.point}, {where: {id: req.user.id}}))
 
                 res.status(200)
                 .json({
                         result: 'sucess',
                         message: 'point created',})
             }
+            else{
+                Details.update({
+                    point: parseInt(req.body.point) + userDetail.point
+                },
+                {
+                    where: {
+                        userID: req.user.id,
+                        gameID: req.body.gameID
+                    }
+                })
+                .then(User_account.update({ point: parseInt(req.body.point) + user.point}, {where: {id: req.user.id}}))
+    
+                res.status(200)
+                .json({
+                        result: 'success',
+                        message: 'point updated!',})
+            }
             
-            Details.update({
-                point: parseInt(req.body.point) + userDetail.point
-            },
-            {
-                where: {
-                    userID: req.user.id,
-                    gameID: req.body.gameID
-                }
-            })
-            .then(User_account.update({ point: parseInt(req.body.point) + user.point}, {where: {id: req.user.id}}))
-
-            res.status(200)
-            .json({
-                    result: 'success',
-                    message: 'point updated!',})
 
         } catch (error) {
             return res.status(500).json({

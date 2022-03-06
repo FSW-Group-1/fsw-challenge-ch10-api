@@ -61,8 +61,14 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     description: DataTypes.STRING,
     imageLink: DataTypes.STRING,
-    point: DataTypes.INTEGER,
-    asAdmin: DataTypes.BOOLEAN
+    point: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    asAdmin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   }, {
     sequelize,
     modelName: 'User_account',
