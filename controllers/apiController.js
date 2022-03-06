@@ -147,7 +147,5 @@ module.exports = {
         }
     },
 
-
-
 }
 
