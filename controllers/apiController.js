@@ -12,7 +12,7 @@ module.exports = {
             })
 
             if(user){
-                console.log('here')
+                // console.log('here')
                 return res.status(400).json({
                     result: 'failed',
                     message: 'Email already existed'
@@ -147,60 +147,7 @@ module.exports = {
         }
     },
 
-    updateDetails: async(req, res) =>{
-        try {
-            let userDetail = await Details.findOne({
-                attributes: ['point'],
-                where: {
-                    gameID: req.body.gameID,
-                    userID: req.user.id
-                }
-            });
 
-            if(!userDetail){
-                console.log('IF NOT EXIST RUN HERE')
-                Details.create({
-                    gameID: req.body.gameID,
-                    userID: req.user.id,
-                    point: req.body.point
-                })
-                .then(data => 
-                    res.status(200)
-                        .json({
-                            result: 'sucess',
-                            message: 'point created',
-                            data: {
-                                point: data.point
-                            }
-                    })
-                )
-            }
-            
-            Details.update({
-                point: parseInt(req.body.point) + userDetail.point
-            },
-            {
-                where: {
-                    userID: req.user.id,
-                    gameID: req.body.gameID
-                }
-            })
-            .then(data => 
-                res.status(200)
-                    .json({
-                        result: 'sucess',
-                        message: 'point updated',
-                        point: data
-                })
-            )
-            
 
-        } catch (error) {
-            return res.status(500).json({
-                result: 'Server failed',
-                error: error.message,
-              });
-        }
-    }
 }
 
