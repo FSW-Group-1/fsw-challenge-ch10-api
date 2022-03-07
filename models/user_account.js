@@ -48,7 +48,7 @@ module.exports = (sequelize, DataTypes) => {
     generateToken = () => {
       const payload = {
         id: this.id,
-        username: this.username
+        email: this.email
       }
       // Generate token
       return jwt.sign(payload, 'binarch7')
