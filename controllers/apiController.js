@@ -1,4 +1,5 @@
 const { User_account, Details } = require('../models')
+const { Op } = require('sequelize')
 
 module.exports = {
     register: async (req, res) => {
@@ -147,5 +148,29 @@ module.exports = {
         }
     },
 
+    search: async(req, res) => {
+        try{
+            const {searchResult} = req.body;
+            User_account.findAll({
+                where: { 
+                    [Op.or]: [
+                        {username: { [Op.iLike]: '%' + searchResult + '%'} },
+                        {email: { [Op.iLike]: '%' + searchResult + '%'} },
+                    ]
+                },
+                attributes: {exclude: ['password', 'asAdmin']}
+            })
+            .then(results => {
+                res.status(200).json({
+                    result: 'success',
+                    message: 'showing all available data',
+                    results
+                })
+            })
+                
+        }catch(error) {
+            console.log(error)
+        }
+    }
 }
 
