@@ -16,6 +16,7 @@ router.post('/score', restrict, game.updatePoints)
 router.get('/played', restrict, game.playedGame)
 router.get('/users', game.allUser)
 router.get('/leaderboard/:id', game.getLeaderboardGame)
+router.post('/search', api.search)
 
 
 

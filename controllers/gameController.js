@@ -91,7 +91,11 @@ module.exports = {
     allUser: async (req, res) =>{
         try {
             const users = await User_account.findAll({
-                attributes: {exclude: ['password', 'asAdmin']}
+                attributes: {exclude: ['password', 'asAdmin']},
+                include: {
+                    model: Details,
+                    as: 'Details',
+                }
             });
             if(!users){
                 res.status(400).json({result: 'failed', message: 'no user yet!'})
