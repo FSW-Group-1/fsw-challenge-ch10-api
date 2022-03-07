@@ -53,7 +53,7 @@ module.exports = {
                     message: "Login successfully",
                     data: {
                         id: user.id, 
-                        username: user.username, 
+                        email: user.email, 
                         accessToken: user.generateToken()
                     },
                 });
