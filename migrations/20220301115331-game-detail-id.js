@@ -8,7 +8,7 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropColumn('Details', 'gameID');
+    await queryInterface.removeColumn('Details', 'gameID');
 
   }
 };

@@ -15,6 +15,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.hasMany(models.Details,{
+        foreignKey: 'userID'
+      })
     }
 
     static #encrypt = (password) => bcrypt.hashSync(password, 10)
@@ -58,7 +61,14 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     description: DataTypes.STRING,
     imageLink: DataTypes.STRING,
-    point: DataTypes.INTEGER
+    point: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    asAdmin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   }, {
     sequelize,
     modelName: 'User_account',

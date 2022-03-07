@@ -21,7 +21,10 @@ const user1 = [...Array(99)].map(user => (
     email: faker.internet.email(),
     asAdmin: false,
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
+    description: faker.lorem.sentence(),
+    imageLink: 'https://dummyimage.com/600x400/000/fff&text=Account',
+    point: 0
   }
 ))
 

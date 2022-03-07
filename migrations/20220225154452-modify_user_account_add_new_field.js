@@ -13,7 +13,8 @@ module.exports = {
       'asAdmin',
       {
         type: Sequelize.BOOLEAN,
-        allowNull: false
+        allowNull: false,
+        defaultValue: false
       }
     )
   },
