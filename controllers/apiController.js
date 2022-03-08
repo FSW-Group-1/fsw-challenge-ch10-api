@@ -61,13 +61,13 @@ module.exports = {
             })
             .catch(error => {
                 res.status(400).json({
-                    result: 'failed',
-                    message: error.message
+                    result: 'Login failed!',
+                    message: 'Try entering the right credentials'
                 })
             })
         } catch (error) {
             return res.status(500).json({
-                result: 'Server failed',
+                result: 'Server failed!',
                 error: error.message,
               });
         }
