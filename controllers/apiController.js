@@ -75,7 +75,13 @@ module.exports = {
 
     currentProfile: async (req, res) => {
         try {
-            const currentUserInfo = await User_account.findByPk(req.user.id)
+            const currentUserInfo = await User_account.findOne({
+                where: {id: req.user.id},
+                include: {
+                    model: Details,
+                    as: 'Details'
+                }
+            })
             res.status(200).json({
                 currentUserInfo
             })

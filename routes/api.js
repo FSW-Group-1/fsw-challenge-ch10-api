@@ -9,14 +9,22 @@ const restrict = require('../middlewares/restrict')
 router.post('/register', api.register)
 router.post('/login', api.login)
 
-router.get('/me', restrict, api.currentProfile)
+//Profile
+router.get('/me', restrict, api.currentProfile) //Ini disatuin sama playedGame juga bisa
 router.post('/me/update', restrict, authorize, api.updateProfile)
+
 router.get('/all', api.showAllProfile)
+
+//Ini method untuk update game
 router.post('/score', restrict, game.updatePoints)
 router.get('/played', restrict, game.playedGame)
-router.get('/users', game.allUser)
-router.get('/leaderboard/:id', game.getLeaderboardGame)
+
+//Profile list method
+router.get('/users', game.allUser) //ini bisa dipake untuk gantiin '/all' + details
 router.post('/search', api.search)
+
+//Leaderboard
+router.get('/leaderboard/:id', game.getLeaderboardGame)
 
 
 
