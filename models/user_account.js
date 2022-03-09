@@ -44,6 +44,19 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
 
+    static verifyToken = async (token) =>{
+      try {
+        const tokenverify = jwt.verify(token, 'binarch7', (err, result) => {
+          // res.status(200).json({err: err, result: result})
+          return {err: err, result: result}
+        })
+        return Promise.resolve(tokenverify)
+      } catch (error) {
+        return Promise.reject(error)
+      }
+      
+      
+    }
     // generate token JWT
     generateToken = () => {
       const payload = {

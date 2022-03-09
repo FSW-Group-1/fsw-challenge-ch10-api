@@ -177,6 +177,21 @@ module.exports = {
         }catch(error) {
             console.log(error)
         }
+    },
+
+    verify: async (req, res)  => {
+        User_account.verifyToken(req.headers.authorization)
+                    .then(result => {
+                        console.log(result)
+                        res.status(200).json({
+                            result
+                        })
+                    })
+                    .catch(error => {
+                        res.status(400).json({
+                            error
+                        })
+                    })
     }
 }
 
