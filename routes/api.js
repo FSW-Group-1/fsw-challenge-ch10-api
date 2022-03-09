@@ -4,6 +4,7 @@ const api = require('../controllers/apiController');
 const game = require('../controllers/gameController');
 const authorize = require('../middlewares/authorize');
 const restrict = require('../middlewares/restrict')
+const {User_account} = require('../models')
 
 
 router.post('/register', api.register)
@@ -11,7 +12,7 @@ router.post('/login', api.login)
 
 //Profile
 router.get('/me', restrict, api.currentProfile) //Ini disatuin sama playedGame juga bisa
-router.post('/me/update', restrict, authorize, api.updateProfile)
+router.post('/me/update', restrict, api.updateProfile)
 
 router.get('/all', api.showAllProfile)
 
@@ -25,6 +26,9 @@ router.post('/search', api.search)
 
 //Leaderboard
 router.get('/leaderboard/:id', game.getLeaderboardGame)
+
+router.get('/verifytoken', restrict, api.verify)
+
 
 
 
