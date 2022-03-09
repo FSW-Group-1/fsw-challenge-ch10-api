@@ -192,6 +192,36 @@ module.exports = {
                             error
                         })
                     })
+    },
+
+    otherUser: async(req, res) => {
+        try {
+            const searchID = req.params.id;
+            const users = User_account.findOne({
+                where: {id: searchID},
+                attributes: {exclude: ['password', 'asAdmin']},
+                include: {
+                    model: Details,
+                    as: 'Details',
+                }
+            }).then(result => {
+                res.status(200).json({
+                    result: 'success',
+                    message: 'Successfully retrieved all user',
+                    data: result
+                })
+            })
+
+            if(!users){
+                res.status(400).json({result: 'failed', message: 'no user yet!'})
+            }
+            
+        }catch(error){
+            return res.status(500).json({
+                result: 'Server failed',
+                error: error.message,
+              });
+        }
     }
 }
 
