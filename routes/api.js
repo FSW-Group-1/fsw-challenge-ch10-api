@@ -4,8 +4,6 @@ const api = require('../controllers/apiController');
 const game = require('../controllers/gameController');
 const authorize = require('../middlewares/authorize');
 const restrict = require('../middlewares/restrict')
-const {User_account} = require('../models')
-
 
 router.post('/register', api.register)
 router.post('/login', api.login)
