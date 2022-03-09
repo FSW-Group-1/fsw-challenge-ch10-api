@@ -77,10 +77,10 @@ module.exports = {
         try {
             const currentUserInfo = await User_account.findOne({
                 where: {id: req.user.id},
-                include: {
-                    model: Details,
-                    as: 'Details'
-                }
+                // include: {
+                //     model: Details,
+                //     as: 'Details'
+                // }
             })
             res.status(200).json({
                 currentUserInfo
