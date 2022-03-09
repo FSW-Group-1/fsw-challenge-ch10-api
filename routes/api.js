@@ -20,6 +20,8 @@ router.get('/played', restrict, game.playedGame)
 
 //Profile list method
 router.get('/users', game.allUser) //ini bisa dipake untuk gantiin '/all' + details
+router.get('/user/:id', api.otherUser) //ini bisa dipake untuk gantiin '/all' + details
+
 router.post('/search', api.search)
 
 //Leaderboard
