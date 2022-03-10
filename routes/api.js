@@ -24,9 +24,11 @@ router.get('/user/:id', api.otherUser) //ini bisa dipake untuk gantiin '/all' + 
 
 router.post('/search', api.search)
 
-//Leaderboard
+//Leaderboard and Game related
+router.get('/allgame', game.getAllGame)
 router.get('/leaderboard/:id', game.getLeaderboardGame)
-
+router.get('/gamedetail/:id', game.getGameDetails)
+router.post('/gamedetail/:id/update', game.updateGameDetails)
 router.get('/verifytoken', restrict, api.verify)
 
 

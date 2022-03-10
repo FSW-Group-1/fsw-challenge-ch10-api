@@ -1,4 +1,4 @@
-const { User_account, Details } = require('../models')
+const { User_account, Details, Games } = require('../models')
 
 module.exports = {
     updatePoints: async(req, res) =>{
@@ -148,6 +148,62 @@ module.exports = {
                 error: error.message,
               });
         }
+    },
+    
+    getGameDetails: async(req, res) => {
+        try {
+            const id = req.params.id;
+            await Games.findOne({where: {id}}).then(game => {
+                res.status(200).json({
+                    result: 'success',
+                    message: 'Game with certain id',
+                    data: game
+                })
+            })
+        } catch (error) {
+            return res.status(500).json({
+                result: 'Server failed',
+                error: error.message,
+              });
+        }
+    },
+
+    updateGameDetails: async (req, res) => {
+        try {
+            const id = req.params.id;
+            const { name, description, imageLink, gameLink} = req.body;
+            await Games.update({
+                name, description, imageLink, gameLink
+            }, {where: {id}})
+            .then(res.status(200).json({
+                result: 'success',
+                message: 'info has been updated',
+                })
+            )
+        } catch (error) {
+            return res.status(500).json({
+                result: 'Server failed',
+                error: error.message,
+              });
+        }
+    },
+
+    getAllGame: async(req, res) => {
+        try {
+            await Games.findAll().then(game => {
+                res.status(200).json({
+                    result: 'success',
+                    message: 'Here is all the game',
+                    data: game
+                })
+            })
+        } catch (error) {
+            return res.status(500).json({
+                result: 'Server failed',
+                error: error.message,
+              });
+        }
     }
+
 
 }
