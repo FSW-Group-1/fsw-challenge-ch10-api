@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.User_account, {
         foreignKey: 'userID'
       })
+
+      this.belongsTo(models.User_account, {
+        foreignKey: 'gameID'
+      })
     }
   }
   Details.init({

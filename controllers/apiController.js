@@ -77,13 +77,16 @@ module.exports = {
         try {
             const currentUserInfo = await User_account.findOne({
                 where: {id: req.user.id},
+                attributes: {exclude: ['password']},
                 include: {
                     model: Details,
                     as: 'Details'
                 }
             })
             res.status(200).json({
-                currentUserInfo
+                result: 'success',
+                message: 'Here is your own info',
+                data: currentUserInfo
             })
         } catch (error) {
             return res.status(500).json({
