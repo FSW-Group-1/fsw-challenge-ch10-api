@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'userID'
       })
 
-      this.belongsTo(models.User_account, {
+      this.belongsTo(models.Games, {
         foreignKey: 'gameID'
       })
     }
