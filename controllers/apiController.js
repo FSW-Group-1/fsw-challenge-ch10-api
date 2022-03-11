@@ -1,4 +1,4 @@
-const { User_account, Details } = require('../models')
+const { User_account, Details, Games } = require('../models')
 const { Op } = require('sequelize')
 
 module.exports = {
@@ -80,7 +80,11 @@ module.exports = {
                 attributes: {exclude: ['password']},
                 include: {
                     model: Details,
-                    as: 'Details'
+                    as: 'Details',
+                    include: {
+                        model: Games,
+                        as: 'Game'
+                    }
                 }
             })
             res.status(200).json({
@@ -206,11 +210,15 @@ module.exports = {
                 include: {
                     model: Details,
                     as: 'Details',
+                    include: {
+                        model: Games,
+                        as: 'Game'
+                    }
                 }
             }).then(result => {
                 res.status(200).json({
                     result: 'success',
-                    message: 'Successfully retrieved all user',
+                    message: 'Successfully retrieved user',
                     data: result
                 })
             })
